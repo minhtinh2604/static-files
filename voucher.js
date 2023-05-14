@@ -1,4 +1,4 @@
-const Index_template = {
+const RT_voucher_index_template = {
 template: `
     <div class="container voucher-container">
             <!-- <div class="text-center mt-3">
@@ -155,7 +155,7 @@ const rt_voucher_translation_messages = {
 
 /***** Application *****/
 const rt_voucher_i18n = new VueI18n({ locale: 'vn', fallbackLocale: 'vn', messages: rt_voucher_translation_messages });
-Vue.component("Index_template", Index_template);
+Vue.component("Index_template", RT_voucher_index_template);
 new Vue({
     el: '#appRTVoucher',
     i18n: rt_voucher_i18n,
