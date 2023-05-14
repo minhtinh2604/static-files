@@ -3,6 +3,11 @@ body .rt2023{
 	background-color: transparent;
 	--custom-color: #003366;
 }
+
+.rt2023 input {
+    color: var(--custom-color);
+}
+
 .rt2023 #appRTVoucher{
 	font-family: 'Google Sans', sans-serif;
 }
