@@ -142,7 +142,7 @@ template: `
     }
 };
 
-const translation_messages = {
+const rt_voucher_translation_messages = {
     en: {
         "search_voucher_placeholder": "Search...",
         "search": "Search"
@@ -154,11 +154,11 @@ const translation_messages = {
 }
 
 /***** Application *****/
-const i18n = new VueI18n({ locale: 'vn', fallbackLocale: 'vn', messages: translation_messages });
+const rt_voucher_i18n = new VueI18n({ locale: 'vn', fallbackLocale: 'vn', messages: rt_voucher_translation_messages });
 Vue.component("Index_template", Index_template);
 new Vue({
     el: '#appRTVoucher',
-    i18n,
+    i18n: rt_voucher_i18n,
     created(){  
         document.body.classList.add('rtwrapper')
     },
