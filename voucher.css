@@ -56,7 +56,6 @@ body .rt2023{
 .rt2023 .voucher-wrapper .voucher-item {
 	font-size: 12px;
 	color: #3D3F40;
-  cursor: pointer;
   text-decoration: none;
   background-color: #fff;
   padding: 8px;
@@ -65,7 +64,8 @@ body .rt2023{
 }
 
 .rt2023 .voucher-wrapper .voucher-item .voucher-name{
-	font-size:13px; 
+	cursor: pointer;
+	font-size: 13px; 
 	font-weight: 700; 
 	line-height: 1.2; 
 	word-break: break-word;
@@ -74,6 +74,9 @@ body .rt2023{
 	text-overflow: ellipsis;
 	-webkit-box-orient: vertical;
 	-webkit-line-clamp: 2;
+}
+.rt2023 .voucher-wrapper .voucher-item .voucher-name:hover{
+	text-decoration: underline;
 }
 
 .rt2023 .voucher-wrapper .voucher-item .voucher-expired{
