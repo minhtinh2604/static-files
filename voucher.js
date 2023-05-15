@@ -21,7 +21,7 @@ template: `
                     DANH SÁCH COUPON
                 </div>
                 <div class="p-3">
-                    <div style="padding: 0.5rem; background-color: rgb(225, 225, 225); border-radius: 4px;">
+                    <div style="padding: 0.5rem; background-color: rgb(245, 245, 245); border-radius: 4px;">
                         <div class="voucher-wrapper">
                             <div v-for="index in 12" :key="index" :class="'voucher-item h-100 voucher-item-'+index">
                                 <div class="d-flex flex-row h-100">
