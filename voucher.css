@@ -78,6 +78,7 @@ body .rt2023{
 }
 
 .rt2023 .voucher-wrapper .voucher-item .voucher-name{
+	text-decoration: underline;
 	cursor: pointer;
 	font-size: 13px; 
 	font-weight: 700; 
