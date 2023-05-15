@@ -100,8 +100,8 @@ template: `
                         </div>
                         <div class="modal-footer border-0">
                             <div class="input-group">
-                                <input type="text" class="form-control w-50 text-center" disabled value="FSV-505453823524864-505453823524864-505453823524864">
-                                <button class="btn btn-outline-secondary btn-copy-code w-50" type="button">Sao chép</button>
+                                <input type="text" class="form-control text-center" disabled value="FSV-505453823524864-505453823524864-505453823524864">
+                                <button class="btn btn-outline-secondary btn-copy-code px-4" type="button">Sao chép</button>
                             </div>
                         </div>
                     </div>
