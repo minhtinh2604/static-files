@@ -6,7 +6,6 @@ var bootstrap_css = current_src.replace("rt_voucher.js", "bootstrap.css");
 var voucher_css = current_src.replace("rt_voucher.js", "voucher.css");
 var voucher_js = current_src.replace("rt_voucher.js", "voucher.js");
 
-
 var head  = document.getElementsByTagName('head')[0]; 
 var link = document.createElement('link'); 
 link.href = bootstrap_css; 
@@ -15,16 +14,15 @@ link.type = 'text/css';
 link.media = 'all'; 
 head.appendChild(link);
 
-var head  = document.getElementsByTagName('head')[0]; 
+var body  = document.getElementsByTagName('body')[0]; 
 var link2 = document.createElement('link'); 
 link2.href = voucher_css; 
 link2.rel = 'stylesheet'; 
 link2.type = 'text/css'; 
 link2.media = 'all'; 
-head.appendChild(link2);
+body.appendChild(link2);
 
-var head  = document.getElementsByTagName('body')[0]; 
 var script = document.createElement('script'); 
 script.src = voucher_js;
 script.type = 'text/javascript';
-head.appendChild(script);
+body.appendChild(script);
