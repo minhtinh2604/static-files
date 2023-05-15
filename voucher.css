@@ -5,11 +5,11 @@ body .rt2023{
 }
 
 .rt2023 input {
-    color: var(--custom-color);
+    color: var(--custom-color)!important;
 }
 
 .rt2023 #appRTVoucher{
-	font-family: 'Google Sans', sans-serif;
+	font-family: 'Google Sans', sans-serif !important;
 }
 .rt2023 .voucher-container{
 	max-width: 960px;
