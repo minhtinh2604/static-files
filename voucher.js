@@ -1,11 +1,11 @@
 const RT_voucher_index_template = {
 template: `
     <div class="container voucher-container">
-            <!-- <div class="text-center mt-3">
+            <div v-if="show_spinner === true" class="text-center mt-3">
                 <div class="spinner-border voucher-spinner-border" role="status">
                     <span class="visually-hidden"></span>
                 </div>
-            </div> -->
+            </div>
             <div class="px-3 pt-4">
                 <div class="search-title">Tìm mã giảm giá</div>
             </div>
@@ -47,23 +47,12 @@ template: `
                             </div>
                         </div>                  
                     </div>
-                    <nav>
-                      <ul class="pagination mt-2 mb-0">
-                        <li class="page-item">
-                          <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                          </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                          <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                          </a>
-                        </li>
-                      </ul>
-                    </nav>
+                    <Pagination_template class="mt-2"
+                        :totalPages="10"
+                        :perPage="10"
+                        :currentPage="currentPage"
+                        @pagechanged="onPageChange">
+                    </Pagination_template>
                 </div>
 
                 <!-- Voucher Detail Modal -->
@@ -100,7 +89,7 @@ template: `
                         </div>
                         <div class="modal-footer border-0">
                             <div class="input-group">
-                                <input type="text" class="form-control text-center" disabled value="FSV-505453823524864">
+                                <input type="text" class="form-control voucher-code text-center" disabled value="FSV-505453823524864">
                                 <button class="btn btn-outline-secondary btn-copy-code px-4" type="button">Sao chép</button>
                             </div>
                         </div>
@@ -112,7 +101,10 @@ template: `
     `,
     props: [],
     data: () => ({
-
+        show_spinner : false,
+        language: 'vn',
+        voucher_to_display: [],
+        currentPage: 1,
     }),
     mounted(){
 
@@ -122,6 +114,10 @@ template: `
             bootstrapRT.Modal.getOrCreateInstance(document.getElementById('voucherDetailModal')).show()
         },
 
+        onPageChange(page) {
+            console.log(page)
+            this.currentPage = page;
+        },
 
         copyVoucher(text, view_id){
             this.copyToClipboard(text, view_id)
@@ -142,6 +138,116 @@ template: `
     }
 };
 
+const RT_pagination_template = {
+    template: `
+        <nav>
+            <ul class="pagination mb-0">
+                <li :class="{ 'page-item disabled': isInFirstPage == true, 'page-item': isInFirstPage == false }">
+                    <a class="page-link" href="#" aria-label="First" @click="onClickFirstPage">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li :class="{ 'page-item disabled': isInFirstPage == true, 'page-item': isInFirstPage == false }">
+                    <a class="page-link" href="#" aria-label="Previous" @click="onClickPreviousPage">
+                        <span aria-hidden="true">&#8249;</span>
+                    </a>
+                </li>
+
+                <li v-for="page in pages" :key="page.name" :class="{ 'page-item disabled': page.isDisabled == true, 'page-item': page.isDisabled == false }">
+                    <a :class="{ 'page-link active': isPageActive(page.name) == true, 'page-link': isPageActive(page.name) == false }" href="#" @click="onClickPage(page.name)">{{ page.name }}</a>
+                </li>
+
+                <li :class="{ 'page-item disabled': isInLastPage == true, 'page-item': isInLastPage == false }">
+                    <a class="page-link" href="#" aria-label="Next" @click="onClickNextPage">
+                        <span aria-hidden="true">&#8250;</span>
+                    </a>
+                </li>
+                <li :class="{ 'page-item disabled': isInLastPage == true, 'page-item': isInLastPage == false }">
+                    <a class="page-link" href="#" aria-label="Last" @click="onClickLastPage">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    `,
+    props: {
+        maxVisibleButtons: {
+            type: Number,
+            required: false,
+            default: 3
+        },    
+        totalPages: {
+            type: Number,
+            required: true
+        },
+        perPage: {
+            type: Number,
+            required: true
+        },
+        currentPage: {
+            type: Number,
+            required: true
+        }
+    },
+    computed: {
+        startPage() {
+            // When on the first page
+            if (this.currentPage === 1) {
+                return 1;
+            }
+            // When on the last page
+            if (this.currentPage === this.totalPages) {
+                const start = this.totalPages - (this.maxVisibleButtons - 1);
+                if (start === 0) {
+                  return 1;
+                } else {
+                  return start;
+                }
+            }
+            // When inbetween
+            return this.currentPage - 1;
+        },
+        endPage() {
+            return Math.min(this.startPage + this.maxVisibleButtons - 1, this.totalPages);
+        },
+        pages() {
+            const range = [];
+            for (let i = this.startPage; i <= this.endPage; i++) {
+                range.push({ name: i, isDisabled: i === this.currentPage });
+            }
+            return range;
+        },
+        isInFirstPage() {
+            return this.currentPage === 1;
+        },
+        isInLastPage() {
+            return this.currentPage === this.totalPages;
+        }
+    },
+    methods: {
+        onClickFirstPage() {
+            this.$emit('pagechanged', 1);
+        },
+        onClickPreviousPage() {
+            this.$emit('pagechanged', this.currentPage - 1);
+        },
+        onClickPage(page) {
+            this.$emit('pagechanged', page);
+        },
+        onClickNextPage() {
+            this.$emit('pagechanged', this.currentPage + 1);
+        },
+        onClickLastPage() {
+            this.$emit('pagechanged', this.totalPages);
+        },
+        isPageActive(page) {
+            return this.currentPage === page;
+        }
+    }
+}
+
+
+
 const rt_voucher_translation_messages = {
     en: {
         "search_voucher_placeholder": "Search...",
@@ -156,6 +262,7 @@ const rt_voucher_translation_messages = {
 /***** Application *****/
 const rt_voucher_i18n = new VueI18n({ locale: 'vn', fallbackLocale: 'vn', messages: rt_voucher_translation_messages });
 Vue.component("Index_template", RT_voucher_index_template);
+Vue.component("Pagination_template", RT_pagination_template);
 new Vue({
     el: '#appRTVoucher',
     i18n: rt_voucher_i18n,
@@ -164,7 +271,6 @@ new Vue({
     },
     data: () => ({
         language: 'vn',
-    	show_spinner : false,
         voucher_to_display: [],
     }),
     methods:{
