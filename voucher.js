@@ -229,7 +229,7 @@ new Vue({
     methods:{
         load_data(){
             this.$i18n.locale = this.language
-            document.querySelector("body .rt2023").style = " --custom-color: #f98c43;"
+            document.querySelector("body .rt2023").style = " --custom-color: rgb(103, 58, 183);"
         },       
     }
 });
