@@ -6,9 +6,19 @@ var bootstrap_css = current_src.replace("rt_voucher.js", "bootstrap.css");
 var voucher_css = current_src.replace("rt_voucher.js", "voucher.css");
 var voucher_js = current_src.replace("rt_voucher.js", "voucher.js");
 
-var timestamp = Date.now()
+var data_style_color = document.getElementById('rt_voucher_script').getAttribute('data-style-color')
+var data_limit = document.getElementById('rt_voucher_script').getAttribute('data-limit')
+var data_coupon_row = document.getElementById('rt_voucher_script').getAttribute('data-row')
+var data_language = document.getElementById('rt_voucher_script').getAttribute('data-language')
 
+if (!data_style_color) { data_style_color = '#673AB7' }
+if (!data_limit) { data_limit = 10 }
+if (!data_coupon_row || data_coupon_row > 3 || data_coupon_row < 1) { data_coupon_row = 3 }
+if (!data_language) { data_language = "en" }
+
+var timestamp = Date.now()
 var head  = document.getElementsByTagName('head')[0]; 
+
 var link = document.createElement('link'); 
 link.href = bootstrap_css + '?t=' + timestamp; 
 link.rel = 'stylesheet'; 
