@@ -193,7 +193,7 @@ const rt_voucher_translation_messages = {
         "widget_title": "Voucher",
         "search_voucher_placeholder": "Search...",
         "search": "Search", 
-        "voucher_list": "DANH SÁCH COUPON",
+        "voucher_list": "VOUCHER",
         "copy": "Copy",
         "copy_code": "Copy code",
         "voucher_description": "Description",
@@ -203,7 +203,7 @@ const rt_voucher_translation_messages = {
         "widget_title": "Tìm mã giảm giá",
         "search_voucher_placeholder": "Tìm kiếm...",
         "search": "Tìm kiếm",
-        "voucher_list": "DANH SÁCH COUPON",
+        "voucher_list": "DANH SÁCH VOUCHER",
         "copy": "Copy",
         "copy_code": "Lấy code",
         "voucher_description": "Mô tả chi tiết",
@@ -212,7 +212,7 @@ const rt_voucher_translation_messages = {
 }
 
 /***** Application *****/
-const rt_voucher_i18n = new VueI18n({ locale: 'vn', fallbackLocale: 'vn', messages: rt_voucher_translation_messages });
+const rt_voucher_i18n = new VueI18n({ locale: 'vn', fallbackLocale: 'en', messages: rt_voucher_translation_messages });
 Vue.component("Index_template", RT_voucher_index_template);
 Vue.component("Pagination_template", RT_pagination_template);
 new Vue({
@@ -223,13 +223,13 @@ new Vue({
         this.load_data()
     },
     data: () => ({
-        language: 'vn',
+        language: data_language,
         voucher_to_display: [],
     }),
     methods:{
         load_data(){
             this.$i18n.locale = this.language
-            document.querySelector("body .rt2023").style = " --custom-color: rgb(103, 58, 183);"
+            document.querySelector("body .rt2023").style = " --custom-color: " + data_style_color + ";"
         },       
     }
 });
