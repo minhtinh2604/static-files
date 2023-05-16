@@ -29,7 +29,9 @@ body .rt2023{
 	border-color: var(--custom-color);
 }
 .rt2023 #input-search:focus,
-.rt2023 #input-search:active{
+.rt2023 #input-search:active,
+.rt2023 #button-search:active,
+.rt2023 #button-search:focus{
 	box-shadow: none;
 }
 .rt2023 #button-search{
