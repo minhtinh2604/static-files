@@ -1,6 +1,8 @@
 var Rentracks = {
 	tracking_base_url : 'https://track.rentracks.com.vn',
 	utm_source : 'rentracks',
+	source_param : 'utm_source',
+	click_id_param : 'rtsp',
 	cookie_duration : 30,
 	cookie_domain : '',
 	sid : 0,
@@ -27,6 +29,8 @@ var Rentracks = {
 		return null;
 	},
 	init: function(options){
+		this.source_param = options.source_param ? options.source_param : 'utm_source';
+		this.click_id_param = options.click_id_param ? options.click_id_param : 'rtsp';
 		this.utm_source = options.utm_source ? options.utm_source : 'rentracks';
 		this.cookie_duration = options.cookie_duration ? options.cookie_duration : 30;
 		this.cookie_domain = options.cookie_domain ? options.cookie_domain : window.location.hostname.replace(/^www\./i, "");
@@ -34,8 +38,8 @@ var Rentracks = {
 		this.reoccur = options.reoccur ? options.reoccur : 1;
 	},
 	trackCookie: function(){
-		var utm_source = this.getUrlParameter('utm_source');
-		var rtsp = this.getUrlParameter('rtsp');
+		var utm_source = this.getUrlParameter(this.source_param);
+		var rtsp = this.getUrlParameter(this.click_id_param);
 		if (utm_source){ this.setCookie('utm_source', utm_source, this.cookie_duration); }
 		if (rtsp) { this.setCookie('_rtsp_sid_' + this.sid, rtsp, this.cookie_duration); }
 	},
