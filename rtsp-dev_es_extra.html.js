@@ -71,6 +71,8 @@ var Rentracks = {
 	}
 };
 
+// utm_source=rentracks&rtsp=<%%SOCKETCODE%%>
+
 // // Init, all pages
 // Rentracks.init({'utm_source':'rentracks','sid':11});
 // // Set cookie, every landing page
