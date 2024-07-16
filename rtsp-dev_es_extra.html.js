@@ -53,6 +53,8 @@ var Rentracks = {
 		
 		var _utm_source = this.getCookie('utm_source');
 		var _rtsp = this.getCookie('_rtsp_sid_' + this.sid);
+		data['_utm_source'] = _utm_source;
+		data['_rtsp'] = _rtsp;
 		if (_utm_source == this.utm_source && _rtsp && cinfo !== ''){
 			var tracking_url = this.tracking_base_url + '/secure/es_extra.html' 
 				+ '?pid=' + encodeURIComponent(conv_pid)
