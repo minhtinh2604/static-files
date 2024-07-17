@@ -28,12 +28,12 @@ var Rentracks = {
 		return null;
 	},
 	init: function(options){
-		this.source_param = options.source_param ? options.source_param : 'utm_source';
-		this.click_id_param = options.click_id_param ? options.click_id_param : 'rtsp';
-		this.utm_source = options.utm_source ? options.utm_source : 'rentracks';
-		this.cookie_duration = options.cookie_duration ? options.cookie_duration : 30;
+		this.source_param = options.source_param ? options.source_param : this.source_param;
+		this.click_id_param = options.click_id_param ? options.click_id_param : this.click_id_param;
+		this.utm_source = options.utm_source ? options.utm_source : this.utm_source;
+		this.cookie_duration = options.cookie_duration ? options.cookie_duration : this.cookie_duration;
 		this.cookie_domain = options.cookie_domain ? options.cookie_domain : window.location.hostname.replace(/^www\./i, "");
-		this.sid = options.sid ? options.sid : 0;
+		this.sid = options.sid ? options.sid : this.sid;
 	},
 	trackCookie: function(){
 		var utm_source = this.getUrlParameter(this.source_param);
